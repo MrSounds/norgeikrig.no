@@ -22,6 +22,12 @@ export default async function Home() {
             : `Siden viser NEI. ${status.message}`,
     },
     {
+      question: "Hva gjør man om JA?",
+      answer:
+        "Hvis siden viser JA, skal du først og fremst følge rådene i det aktive Nødvarselet og informasjon direkte fra myndighetene. Nødvarsel forklarer at du bør lese eller lytte til varselet, søke informasjon fra kilder du stoler på, følge råd fra myndighetene og være ekstra oppmerksom på feilinformasjon. NRK P1 er beredskapskanalen dersom andre nyhetsmedier eller offentlige nettsteder ikke er tilgjengelige. Les mer hos Nødvarsel: " +
+        NODVARSEL_ADVICE_URL,
+    },
+    {
       question: "Er dette en offisiell nettside?",
       answer:
         "Nei. erdetkriginorge.no er en uavhengig statusvisning som henter informasjon fra offentlige og pålitelige kilder omtrent hvert minutt. Siden er ment som en enkel oversikt, ikke som en erstatning for råd og varsler direkte fra politiet, Sivilforsvaret, DSB, regjeringen eller andre myndigheter.",
