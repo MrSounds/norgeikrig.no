@@ -108,7 +108,11 @@ export default async function Home() {
 
   return (
     <main>
-      <section className={`statusHero statusHero-${status.tone}`}>
+      <section
+        className={`statusHero statusHero-${status.tone}${
+          militaryExerciseNotices.length > 0 ? " statusHero-withExercise" : ""
+        }`}
+      >
         <div className="statusHeroInner">
           <p className="statusQuestion">{status.question}</p>
           <h1 className="statusAnswer">{status.label}</h1>
@@ -125,31 +129,28 @@ export default async function Home() {
             </p>
           ) : null}
         </div>
+        {militaryExerciseNotices.length > 0 ? (
+          <aside className="exercisePopup" aria-label="Militær øvelse">
+            <p className="exercisePopupLabel">Militær aktivitet</p>
+            <h2>Forsvaret melder om pågående øvelse</h2>
+            <ul>
+              {militaryExerciseNotices.map((notice) => (
+                <li key={notice.url}>
+                  <a href={notice.url}>{notice.title}</a>
+                  {notice.location ? `: ${notice.location}` : null}
+                  {notice.dateText ? ` (${notice.dateText})` : null}
+                </li>
+              ))}
+            </ul>
+            <p>Dette påvirker ikke JA/NEI-statusen.</p>
+          </aside>
+        ) : null}
       </section>
 
       <section className="faqSection" aria-labelledby="faq-title">
         <div className="faqInner">
           <p className="sectionKicker">FAQ</p>
           <h2 id="faq-title">Spørsmål og svar</h2>
-          {militaryExerciseNotices.length > 0 ? (
-            <aside className="exerciseNotice" aria-label="Militær øvelse">
-              <p className="exerciseNoticeLabel">Militær aktivitet</p>
-              <h3>Forsvaret melder om pågående øvelse</h3>
-              <ul>
-                {militaryExerciseNotices.map((notice) => (
-                  <li key={notice.url}>
-                    <a href={notice.url}>{notice.title}</a>
-                    {notice.location ? `: ${notice.location}` : null}
-                    {notice.dateText ? ` (${notice.dateText})` : null}
-                  </li>
-                ))}
-              </ul>
-              <p>
-                Dette er bare kontekst om mulig militær aktivitet. Det påvirker
-                ikke JA/NEI-statusen over.
-              </p>
-            </aside>
-          ) : null}
           <div className="faqList">
             {faqItems.map((item) => (
               <article className="faqItem" key={item.question}>

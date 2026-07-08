@@ -118,7 +118,9 @@ describe("Home page", () => {
     const html = renderToStaticMarkup(await Home());
 
     expect(html).toContain("Forsvaret melder om pågående øvelse");
+    expect(html).toContain('class="exercisePopup"');
     expect(html).toContain("Testøvelse 2026");
-    expect(html).toContain("Det påvirker ikke JA/NEI-statusen over.");
+    expect(html).toContain("Nord-Norge");
+    expect(html).toContain("Dette påvirker ikke JA/NEI-statusen.");
   });
 });
