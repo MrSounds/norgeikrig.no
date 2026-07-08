@@ -4,7 +4,7 @@ export type FetchLike = (
 ) => Promise<Response>;
 
 const DEFAULT_TIMEOUT_MS = 7000;
-const USER_AGENT = "norgeikrig.no/0.1 (+https://norgeikrig.no)";
+const USER_AGENT = "erdetkriginorge.no/0.1 (+https://erdetkriginorge.no)";
 
 type FetchTextOptions = {
   fetcher?: FetchLike;

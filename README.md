@@ -1,4 +1,4 @@
-# norgeikrig.no
+# erdetkriginorge.no
 
 En enkel norsk statusside som svarer `JA`, `NEI` eller `Anta NEI` på spørsmålet:
 
@@ -32,7 +32,7 @@ npm run dev
 Se `.env.example`.
 
 ```bash
-NEXT_PUBLIC_SITE_URL=https://norgeikrig.no
+NEXT_PUBLIC_SITE_URL=https://erdetkriginorge.no
 ```
 
 ## Sjekker

@@ -23,7 +23,7 @@ export default async function Home() {
     {
       question: "Er dette en offisiell nettside?",
       answer:
-        "Nei. norgeikrig.no er en enkel og uavhengig statusvisning. Ved krise skal du følge råd fra politiet, Sivilforsvaret, DSB, regjeringen og andre myndigheter.",
+        "Nei. erdetkriginorge.no er en enkel og uavhengig statusvisning. Ved krise skal du følge råd fra politiet, Sivilforsvaret, DSB, regjeringen og andre myndigheter.",
     },
     {
       question: "Betyr NEI at alt er trygt?",
