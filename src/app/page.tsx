@@ -1,4 +1,6 @@
 import {
+  FORSVARET_ACTIVITY_CALENDAR_URL,
+  FORSVARET_OPERATIONS_EXERCISES_URL,
   NODVARSEL_ADVICE_URL,
   NODVARSEL_HOME_URL,
   NODVARSEL_RSS_INFO_URL,
@@ -51,6 +53,25 @@ export default async function Home() {
       question: "Betyr NEI at det ikke er andre alvorlige hendelser enn krig som pågår?",
       answer:
         "Nei. NEI betyr bare at denne siden ikke har funnet et aktivt varsel som tolkes som krig eller væpnet angrep mot Norge. Andre alvorlige hendelser kan fortsatt pågå.",
+    },
+    {
+      question: "Betyr militære helikoptre eller jagerfly at det er krig?",
+      answer:
+        "Som regel ikke. Forsvaret trener og øver jevnlig i Norge, også sammen med allierte, og øvelser kan gi mer aktivitet i luftrommet enn vanlig. Hvis militær aktivitet faktisk betyr akutt fare for befolkningen, skal du følge Nødvarsel og informasjon direkte fra myndighetene.",
+    },
+    {
+      question: "Hvorfor fraktes stridsvogner eller militære kjøretøy på vei, tog eller skip?",
+      answer:
+        "Militære kjøretøy og tungtransport flyttes ofte til og fra øvelser, baser, verksteder eller havner. Ved større øvelser varsler Forsvaret og trafikkmyndighetene ofte om militærtrafikk, kolonner, tungtransport, forsinkelser og ekstra støy. Hold god avstand, følg skilting og anvisninger, og ikke forstyrr militære kolonner.",
+    },
+    {
+      question: "Hvor kan jeg sjekke om militær aktivitet kan være øvelse?",
+      answer:
+        "Se Forsvarets sider om operasjoner og øvelser: " +
+        FORSVARET_OPERATIONS_EXERCISES_URL +
+        " og Forsvarets aktivitetskalender: " +
+        FORSVARET_ACTIVITY_CALENDAR_URL +
+        ". Lokale kommuner, politiet, Statens vegvesen og Forsvarsbygg kan også publisere informasjon når øvelser påvirker trafikk, støy, skytefelt eller ferdsel.",
     },
     {
       question: "Hvor ofte oppdateres statusen?",
