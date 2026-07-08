@@ -28,6 +28,21 @@ export default async function Home() {
         NODVARSEL_ADVICE_URL,
     },
     {
+      question: "Hvor hentes statusen fra?",
+      answer:
+        "Statusen hentes fra aktive Nødvarsler fra Nødvarsel.no. Siden leser den offentlige RSS-feeden jevnlig og bruker bare aktive varsler som grunnlag for statusen.",
+    },
+    {
+      question: "Hva skal til for at siden viser JA?",
+      answer:
+        "Siden viser bare JA hvis et aktivt Nødvarsel eksplisitt tolkes som krig, væpnet angrep eller tilsvarende alvorlig militær hendelse mot Norge. Et mulig JA-varsel vurderes først strengt av KI og varsles deretter for rask menneskelig verifisering.",
+    },
+    {
+      question: "Hva skjer hvis systemet er usikkert?",
+      answer:
+        "Ved usikkerhet viser siden ikke JA automatisk. Usikre vurderinger varsles for manuell kontroll, og siden holder seg konservativ for å unngå falsk alarm.",
+    },
+    {
       question: "Er dette en offisiell nettside?",
       answer:
         "Nei. erdetkriginorge.no er en uavhengig statusvisning som henter informasjon fra offentlige og pålitelige kilder omtrent hvert minutt. Siden er ment som en enkel oversikt, ikke som en erstatning for råd og varsler direkte fra politiet, Sivilforsvaret, DSB, regjeringen eller andre myndigheter.",
