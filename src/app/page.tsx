@@ -23,7 +23,7 @@ export default async function Home() {
         "Nei. erdetkriginorge.no er en uavhengig statusvisning som henter informasjon fra offentlige og pålitelige kilder omtrent hvert minutt. Siden er ment som en enkel oversikt, ikke som en erstatning for råd og varsler direkte fra politiet, Sivilforsvaret, DSB, regjeringen eller andre myndigheter.",
     },
     {
-      question: "Betyr NEI at alt er trygt?",
+      question: "Betyr NEI at det ikke er andre alvorlige hendelser enn krig som pågår?",
       answer:
         "Nei. NEI betyr bare at denne siden ikke har funnet et aktivt varsel som tolkes som krig eller væpnet angrep mot Norge. Andre alvorlige hendelser kan fortsatt pågå.",
     },
