@@ -76,6 +76,8 @@ a:hover {
 
 .statusHero-unknown .statusAnswer {
   color: var(--unknown);
+  font-size: clamp(5rem, 18vw, 14rem);
+  line-height: 0.85;
 }
 
 .statusExplanation {
