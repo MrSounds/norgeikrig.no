@@ -46,6 +46,25 @@ describe("Home page", () => {
     expect(html).toContain('class="statusExplanation"');
   });
 
+  it("shows the yes explanation below the status answer", async () => {
+    vi.mocked(getWarStatus).mockResolvedValueOnce({
+      ...baseStatus,
+      status: "yes",
+      label: "JA",
+      tone: "danger",
+      message:
+        "Aktivt Nødvarsel tolkes som krig, væpnet angrep eller tilsvarende alvorlig militær hendelse.",
+    });
+
+    const html = renderToStaticMarkup(await Home());
+
+    expect(html).toContain("JA");
+    expect(html).toContain(
+      "Aktivt Nødvarsel tolkes som krig, væpnet angrep eller tilsvarende alvorlig militær hendelse.",
+    );
+    expect(html).toContain('class="statusExplanation"');
+  });
+
   it("does not show a status explanation for regular NEI", async () => {
     vi.mocked(getWarStatus).mockResolvedValueOnce({
       ...baseStatus,

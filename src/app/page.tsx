@@ -5,6 +5,8 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const status = await getWarStatus();
+  const showStatusExplanation =
+    status.status === "yes" || status.status === "assume-no";
   const faqItems = [
     {
       question: "Er Norge i krig nå?",
@@ -57,7 +59,7 @@ export default async function Home() {
         <div className="statusHeroInner">
           <p className="statusQuestion">{status.question}</p>
           <h1 className="statusAnswer">{status.label}</h1>
-          {status.status === "assume-no" ? (
+          {showStatusExplanation ? (
             <p className="statusExplanation">{status.message}</p>
           ) : null}
         </div>
