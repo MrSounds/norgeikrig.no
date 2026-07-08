@@ -18,6 +18,8 @@ export default async function Home() {
   ]);
   const showStatusExplanation =
     status.status === "yes" || status.status === "assume-no";
+  const showExercisePopup =
+    status.status !== "yes" && militaryExerciseNotices.length > 0;
   const faqItems = [
     {
       question: "Er Norge i krig nå?",
@@ -110,7 +112,7 @@ export default async function Home() {
     <main>
       <section
         className={`statusHero statusHero-${status.tone}${
-          militaryExerciseNotices.length > 0 ? " statusHero-withExercise" : ""
+          showExercisePopup ? " statusHero-withExercise" : ""
         }`}
       >
         <div className="statusHeroInner">
@@ -129,7 +131,7 @@ export default async function Home() {
             </p>
           ) : null}
         </div>
-        {militaryExerciseNotices.length > 0 ? (
+        {showExercisePopup ? (
           <aside className="exercisePopup" aria-label="Militær øvelse">
             <p className="exercisePopupLabel">Militær aktivitet</p>
             <h2>Forsvaret melder om pågående øvelse</h2>

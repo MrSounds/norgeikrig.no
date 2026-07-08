@@ -123,4 +123,33 @@ describe("Home page", () => {
     expect(html).toContain("Nord-Norge");
     expect(html).toContain("Dette påvirker ikke JA/NEI-statusen.");
   });
+
+  it("hides military exercise notices when war status is JA", async () => {
+    const notice: MilitaryExerciseNotice = {
+      title: "Testøvelse 2026",
+      url: "https://www.forsvaret.no/ovelser/test",
+      summary: "Forsvaret gjennomfører øvelse.",
+      location: "Nord-Norge",
+      dateText: "8.–19. juli 2026.",
+      sourceName: "Forsvaret",
+      sourceUrl:
+        "https://www.forsvaret.no/om-forsvaret/operasjoner-og-ovelser/ovelser",
+    };
+
+    vi.mocked(getWarStatus).mockResolvedValueOnce({
+      ...baseStatus,
+      status: "yes",
+      label: "JA",
+      tone: "danger",
+      message:
+        "Aktivt Nødvarsel tolkes som krig, væpnet angrep eller tilsvarende alvorlig militær hendelse.",
+    });
+    vi.mocked(getMilitaryExerciseNotices).mockResolvedValueOnce([notice]);
+
+    const html = renderToStaticMarkup(await Home());
+
+    expect(html).toContain("JA");
+    expect(html).not.toContain('class="exercisePopup"');
+    expect(html).not.toContain("Forsvaret melder om pågående øvelse");
+  });
 });
