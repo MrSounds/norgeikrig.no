@@ -18,7 +18,7 @@ En enkel norsk statusside som svarer `JA`, `NEI` eller `Anta NEI` på spørsmål
 
 Triggerord som `krig`, `invasjon` og `angrep` kan bare utløse AI-vurdering. De setter aldri `JA` alene. `uncertain`, `no`, OpenAI-feil eller manglende OpenAI-nøkkel gir aldri `JA`.
 
-Ved `confirmed_yes` eller `uncertain` prøver siden å sende e-post til `ALERT_EMAIL_TO`. E-post krever Resend-konfigurasjon.
+Ved `confirmed_yes` eller `uncertain` prøver siden å sende e-post til `ALERT_EMAIL_TO`. SMTP via Hostinger brukes når `SMTP_USER` og `SMTP_PASSWORD` er satt. Resend kan brukes som valgfri fallback hvis SMTP ikke er konfigurert.
 
 Dette er ikke en offisiell nettside. Ved krise skal råd fra myndighetene følges direkte.
 
@@ -39,9 +39,14 @@ Se `.env.example`.
 NEXT_PUBLIC_SITE_URL=https://erdetkriginorge.no
 OPENAI_API_KEY=
 OPENAI_MODEL=gpt-5.4-mini
-RESEND_API_KEY=
-ALERT_EMAIL_FROM=
+SMTP_HOST=smtp.hostinger.com
+SMTP_PORT=465
+SMTP_SECURE=true
+SMTP_USER=lyder@lyder.no
+SMTP_PASSWORD=
+ALERT_EMAIL_FROM=lyder@lyder.no
 ALERT_EMAIL_TO=lyder2@mac.com
+RESEND_API_KEY=
 ```
 
 ## Sjekker

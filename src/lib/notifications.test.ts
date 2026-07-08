@@ -47,6 +47,42 @@ describe("alert notifications", () => {
     expect(requestBodies[0]?.subject).toBe("erdetkriginorge.no har satt JA");
   });
 
+  it("sends email with SMTP when configured", async () => {
+    const messages: Array<Record<string, unknown>> = [];
+
+    const result = await sendAlertNotification(alert, review, {
+      dedupe: false,
+      from: "lyder@lyder.no",
+      smtpPassword: "smtp-password",
+      smtpTransporter: {
+        sendMail: async (message) => {
+          messages.push(message as Record<string, unknown>);
+        },
+      },
+      smtpUser: "lyder@lyder.no",
+      to: "lyder2@mac.com",
+    });
+
+    expect(result.state).toBe("sent");
+    expect(result.reason).toContain("SMTP");
+    expect(messages[0]?.from).toBe("lyder@lyder.no");
+    expect(messages[0]?.to).toBe("lyder2@mac.com");
+    expect(messages[0]?.subject).toBe("erdetkriginorge.no har satt JA");
+  });
+
+  it("skips SMTP email when password is missing", async () => {
+    const result = await sendAlertNotification(alert, review, {
+      dedupe: false,
+      from: "lyder@lyder.no",
+      smtpPassword: "",
+      smtpUser: "lyder@lyder.no",
+      to: "lyder2@mac.com",
+    });
+
+    expect(result.state).toBe("skipped");
+    expect(result.reason).toContain("SMTP_PASSWORD");
+  });
+
   it("skips email when Resend is not configured", async () => {
     const result = await sendAlertNotification(alert, review, {
       apiKey: "",

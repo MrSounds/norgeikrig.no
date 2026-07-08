@@ -20,9 +20,14 @@ Siden skal aldri vise `JA` bare fordi et aktivt varsel inneholder ord som `krig`
 
 - [ ] Sett `OPENAI_API_KEY` i hostingmiljoet.
 - [ ] Sett `OPENAI_MODEL`, anbefalt startverdi: `gpt-5.4-mini`.
-- [ ] Sett `RESEND_API_KEY` for e-post.
-- [ ] Sett `ALERT_EMAIL_FROM` til en verifisert avsender i Resend.
+- [ ] Sett `SMTP_HOST=smtp.hostinger.com`.
+- [ ] Sett `SMTP_PORT=465`.
+- [ ] Sett `SMTP_SECURE=true`.
+- [ ] Sett `SMTP_USER=lyder@lyder.no`.
+- [ ] Sett `SMTP_PASSWORD` til passordet for Hostinger-mailkontoen.
+- [ ] Sett `ALERT_EMAIL_FROM=lyder@lyder.no`.
 - [ ] Sett `ALERT_EMAIL_TO=lyder2@mac.com`.
+- [ ] Valgfritt: sett `RESEND_API_KEY` hvis Resend skal brukes som fallback naar SMTP ikke er konfigurert.
 
 ## Videre hardening
 
