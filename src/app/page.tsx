@@ -55,8 +55,8 @@ export default async function Home() {
     <main>
       <section className={`statusHero statusHero-${status.tone}`}>
         <div className="statusHeroInner">
-          <h1 className="statusAnswer">{status.label}</h1>
           <p className="statusQuestion">{status.question}</p>
+          <h1 className="statusAnswer">{status.label}</h1>
         </div>
       </section>
 
