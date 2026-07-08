@@ -89,6 +89,9 @@ describe("Home page", () => {
     expect(html).toContain("NEI");
     expect(html).not.toContain('class="statusExplanation"');
     expect(html).not.toContain("Følg rådene i aktivt Nødvarsel");
+    expect(html).toContain(
+      "NEI. Ingen aktive Nødvarsler er tolket som krig eller væpnet angrep mot Norge. Du kan trygt slappe av.",
+    );
   });
 
   it("shows military exercise notices separately from war status", async () => {

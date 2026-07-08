@@ -26,7 +26,7 @@ export default async function Home() {
           ? "Siden viser JA fordi et aktivt Nødvarsel er tolket som krig, væpnet angrep eller tilsvarende alvorlig militær hendelse mot Norge. Følg alltid råd direkte fra myndighetene."
           : status.status === "assume-no"
             ? "Siden viser Anta NEI fordi den ikke får kontakt med Nødvarsel akkurat nå. Det er ikke en bekreftelse fra myndighetene, men en fallback mens siden venter på kontakt fra pålitelige kilder."
-            : `Siden viser NEI. ${status.message}`,
+            : `NEI. ${status.message} Du kan trygt slappe av.`,
     },
     {
       question: "Hva gjør man om JA?",
