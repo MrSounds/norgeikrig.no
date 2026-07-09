@@ -45,8 +45,6 @@ Produksjon på Hostinger bør bruke privat config utenfor `public_html`, for eks
 /home/u786208640/private/erdetkriginorge/config.php
 ```
 
-Bruk `config.example.php` som mal. Den faktiske config-filen skal ikke committes.
-
 Viktige verdier:
 
 ```php
@@ -65,13 +63,13 @@ return [
 ];
 ```
 
-Lokalt kan du bruke `config.local.php` i repo-root. Den ignoreres av Git.
+Den faktiske config-filen skal aldri ligge i Git eller `public_html`.
 
 ## Hostinger Premium deploy
 
 1. Koble Hostinger Git-deploy til `main` og la repoet deployes til `public_html`.
 2. Opprett privat mappe utenfor `public_html`, for eksempel `../private/erdetkriginorge`.
-3. Legg `config.php` i den private mappen basert på `config.example.php`.
+3. Legg `config.php` i den private mappen med verdiene over.
 4. Opprett cachemappen som configen peker på, for eksempel `../private/erdetkriginorge/cache`, og sørg for at PHP kan skrive dit.
 5. Legg inn cron-jobb som kjører:
 
