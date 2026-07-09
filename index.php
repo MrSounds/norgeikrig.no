@@ -111,21 +111,6 @@ $description = 'En enkel norsk statusside som svarer ja eller nei på om det er 
           timeZone: "Europe/Oslo",
         }).format(date);
 
-      const formatRelative = (date) => {
-        const seconds = Math.max(0, Math.round((Date.now() - date.getTime()) / 1000));
-        if (seconds < 60) {
-          return `for ${seconds} sekunder siden`;
-        }
-
-        const minutes = Math.round(seconds / 60);
-
-        if (minutes === 1) {
-          return "for 1 minutt siden";
-        }
-
-        return `for ${minutes} minutter siden`;
-      };
-
       const renderCheckedAt = (isoDate) => {
         const checkedAt = new Date(isoDate);
 
@@ -134,7 +119,7 @@ $description = 'En enkel norsk statusside som svarer ja eller nei på om det er 
         }
 
         checkedAtElement.dataset.checkedAt = isoDate;
-        checkedAtElement.textContent = `${formatDateTime(checkedAt)} (${formatRelative(checkedAt)})`;
+        checkedAtElement.textContent = formatDateTime(checkedAt);
       };
 
       const setRefreshMessage = (message) => {
@@ -175,9 +160,7 @@ $description = 'En enkel norsk statusside som svarer ja eller nei på om det er 
             renderCheckedAt(status.checkedAt);
           }
 
-          if (manual) {
-            setRefreshMessage("Oppdatert.");
-          }
+          setRefreshMessage("");
         } catch {
           if (manual) {
             setRefreshMessage("Kunne ikke oppdatere akkurat nå.");
