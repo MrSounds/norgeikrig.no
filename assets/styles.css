@@ -1,0 +1,234 @@
+:root {
+  --background: #f7f4ec;
+  --foreground: #191919;
+  --muted: #67635c;
+  --line: #d8d0c1;
+  --ok: #0b6b4f;
+  --danger: #9c1f24;
+  --unknown: #745f18;
+  --link: #064f8f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.2;
+}
+
+a {
+  color: var(--link);
+  font-weight: 700;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  text-decoration-thickness: 0.14em;
+}
+
+.statusHero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+}
+
+.statusHeroInner {
+  width: min(100%, 1280px);
+}
+
+.statusHero-withExercise {
+  padding-bottom: 172px;
+}
+
+.statusQuestion {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: clamp(1rem, 2.4vw, 2rem);
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.statusAnswer {
+  margin: 0;
+  letter-spacing: 0;
+  line-height: 0.78;
+  font-size: clamp(7rem, 32vw, 28rem);
+  font-weight: 950;
+  overflow-wrap: anywhere;
+}
+
+.statusHero-ok .statusAnswer {
+  color: var(--ok);
+}
+
+.statusHero-danger .statusAnswer {
+  color: var(--danger);
+}
+
+.statusHero-unknown .statusAnswer {
+  color: var(--unknown);
+  font-size: clamp(5rem, 18vw, 14rem);
+  line-height: 0.85;
+}
+
+.statusExplanation {
+  max-width: 760px;
+  margin: 26px auto 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.statusAdvice {
+  max-width: 760px;
+  margin: 18px auto 0;
+  color: var(--foreground);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.statusAdvice a {
+  color: var(--danger);
+}
+
+.exercisePopup {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  width: min(420px, calc(100% - 48px));
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--unknown);
+  border-radius: 8px;
+  padding: 16px 18px;
+  background: #fffaf0;
+  box-shadow: 0 16px 40px rgb(25 25 25 / 10%);
+  text-align: left;
+}
+
+.exercisePopupLabel {
+  margin: 0 0 7px;
+  color: var(--unknown);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.exercisePopup h2 {
+  margin: 0 0 8px;
+  font-size: 1.08rem;
+  line-height: 1.2;
+}
+
+.exercisePopup ul {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.exercisePopup li {
+  margin: 0 0 6px;
+  color: var(--foreground);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.exercisePopup p:last-child {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.faqSection {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  align-items: center;
+  padding: 64px 24px;
+}
+
+.faqInner {
+  width: min(880px, 100%);
+  margin: 0 auto;
+}
+
+.sectionKicker {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h2 {
+  margin: 0;
+  font-size: clamp(2.4rem, 7vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+.faqList {
+  margin-top: 34px;
+  border-top: 1px solid var(--line);
+}
+
+.faqItem {
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.faqItem h3 {
+  margin: 0 0 8px;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  line-height: 1.2;
+}
+
+.faqItem p {
+  max-width: 760px;
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+  line-height: 1.55;
+}
+
+.sourceCredit {
+  border-top: 1px solid var(--line);
+  padding: 14px 18px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  .statusHero-withExercise {
+    padding-bottom: 176px;
+  }
+
+  .exercisePopup {
+    right: 16px;
+    bottom: 16px;
+    width: calc(100% - 32px);
+  }
+
+  .faqSection {
+    align-items: start;
+    padding-top: 56px;
+  }
+}
+

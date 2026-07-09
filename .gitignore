@@ -21,6 +21,10 @@ pnpm-debug.log*
 # env files
 .env*
 !.env.example
+config.php
+config.local.php
+/storage/*
+!/storage/.gitkeep
 
 # vercel
 .vercel

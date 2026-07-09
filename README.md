@@ -4,6 +4,8 @@ En enkel norsk statusside som svarer `JA`, `NEI` eller `Anta NEI` på spørsmål
 
 > Er det krig i Norge nå?
 
+Produksjonsappen er portet til PHP slik at den kan kjøres på Hostinger Premium Web Hosting via vanlig Git-deploy til `public_html`.
+
 ## Kilder
 
 - Norge-status hentes fra aktiv RSS-feed fra Nødvarsel:
@@ -30,35 +32,58 @@ Dette er ikke en offisiell nettside. Ved krise skal råd fra myndighetene følge
 ## Lokal kjøring
 
 ```bash
-npm install
-npm run dev
+php -S localhost:8000
 ```
 
-Åpne `http://localhost:3000`.
+Åpne `http://localhost:8000`.
 
 ## Miljøvariabler
 
-Se `.env.example`.
+Produksjon på Hostinger bør bruke privat config utenfor `public_html`, for eksempel:
+
+```text
+../private/erdetkriginorge/config.php
+```
+
+Bruk `config.example.php` som mal. Den faktiske config-filen skal ikke committes.
+
+Viktige verdier:
+
+```php
+return [
+    'site_url' => 'https://erdetkriginorge.no',
+    'openai_api_key' => '',
+    'openai_model' => 'gpt-5.4-mini',
+    'smtp_host' => 'smtp.hostinger.com',
+    'smtp_port' => 465,
+    'smtp_secure' => true,
+    'smtp_user' => 'lyder@lyder.no',
+    'smtp_password' => '',
+    'alert_email_from' => 'lyder@lyder.no',
+    'alert_email_to' => 'lyder2@mac.com',
+    'storage_path' => __DIR__ . '/cache',
+];
+```
+
+Lokalt kan du bruke `config.local.php` i repo-root. Den ignoreres av Git.
+
+## Hostinger Premium deploy
+
+1. Koble Hostinger Git-deploy til `main` og la repoet deployes til `public_html`.
+2. Opprett privat mappe utenfor `public_html`, for eksempel `../private/erdetkriginorge`.
+3. Legg `config.php` i den private mappen basert på `config.example.php`.
+4. Opprett cachemappen som configen peker på, for eksempel `../private/erdetkriginorge/cache`, og sørg for at PHP kan skrive dit.
+5. Legg inn cron-jobb som kjører:
 
 ```bash
-NEXT_PUBLIC_SITE_URL=https://erdetkriginorge.no
-OPENAI_API_KEY=
-OPENAI_MODEL=gpt-5.4-mini
-SMTP_HOST=smtp.hostinger.com
-SMTP_PORT=465
-SMTP_SECURE=true
-SMTP_USER=lyder@lyder.no
-SMTP_PASSWORD=
-ALERT_EMAIL_FROM=lyder@lyder.no
-ALERT_EMAIL_TO=lyder2@mac.com
-RESEND_API_KEY=
+php /home/BRUKER/domains/erdetkriginorge.no/public_html/cron/update-status.php
 ```
+
+Kjør den hvert minutt hvis Hostinger tillater det. Siden har også page-load fallback dersom cron henger.
 
 ## Sjekker
 
 ```bash
-npm run lint
-npm run typecheck
-npm test
-npm run build
+find . -name '*.php' -print0 | xargs -0 -n1 php -l
+php tests/run.php
 ```
