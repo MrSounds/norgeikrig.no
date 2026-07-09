@@ -19,7 +19,7 @@ function erdet_faq_items(array $status): array
         ],
         [
             'question' => 'Hva gjør man om JA?',
-            'answer' => 'Hvis siden viser JA, skal du først og fremst følge rådene i det aktive Nødvarselet og informasjon direkte fra myndighetene. Nødvarsel forklarer at du bør lese eller lytte til varselet, søke informasjon fra kilder du stoler på, følge råd fra myndighetene og være ekstra oppmerksom på feilinformasjon. NRK P1 er beredskapskanalen dersom andre nyhetsmedier eller offentlige nettsteder ikke er tilgjengelige. Les mer hos Nødvarsel: ' . ERDET_NODVARSEL_ADVICE_URL,
+            'answer' => 'Hvis denne siden viser JA, bør du søke videre informasjon fra kilder du stoler på (som www.nodvarsel.no), følge råd fra myndighetene og være ekstra oppmerksom på feilinformasjon. NRK P1 er beredskapskanalen dersom andre nyhetsmedier eller offentlige nettsteder ikke er tilgjengelige. Les mer hos Nødvarsel: ' . ERDET_NODVARSEL_ADVICE_URL,
         ],
         [
             'question' => 'Hvor hentes statusen fra?',
