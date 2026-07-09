@@ -133,9 +133,7 @@ $description = 'En enkel norsk statusside som svarer ja eller nei på om det er 
           refreshButton.disabled = true;
         }
 
-        if (manual) {
-          setRefreshMessage("Sjekker...");
-        }
+        setRefreshMessage("");
 
         try {
           const response = await fetch("/api/status", {
