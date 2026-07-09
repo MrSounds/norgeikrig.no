@@ -14,7 +14,7 @@ function erdet_get_war_status(bool $forceRefresh = false): array
     }
 
     $result = erdet_compute_war_status();
-    erdet_write_cache('status.json', $result);
+    erdet_try_write_cache('status.json', $result);
 
     return $result;
 }
@@ -186,4 +186,3 @@ function erdet_build_source(string $state, ?string $error = null): array
 
     return $source;
 }
-

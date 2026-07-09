@@ -14,7 +14,7 @@ function erdet_get_military_exercise_notices(bool $forceRefresh = false): array
     }
 
     $notices = erdet_fetch_military_exercise_notices();
-    erdet_write_cache('exercises.json', $notices);
+    erdet_try_write_cache('exercises.json', $notices);
 
     return $notices;
 }

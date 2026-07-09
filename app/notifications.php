@@ -226,7 +226,8 @@ function erdet_notification_dedupe(string $key): ?int
     $config = erdet_config();
     $ttl = (int) $config['notification_dedupe_ttl'];
 
-    return erdet_with_file_lock('notified.json', function ($handle) use ($key, $ttl): ?int {
+    try {
+        return erdet_with_file_lock('notified.json', function ($handle) use ($key, $ttl): ?int {
         rewind($handle);
         $raw = stream_get_contents($handle);
         $data = is_string($raw) && $raw !== '' ? json_decode($raw, true) : [];
@@ -245,12 +246,16 @@ function erdet_notification_dedupe(string $key): ?int
         fwrite($handle, json_encode($fresh, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?: '{}');
 
         return isset($fresh[$key]) ? (int) $fresh[$key] : null;
-    });
+        });
+    } catch (Throwable) {
+        return null;
+    }
 }
 
 function erdet_mark_notification_sent(string $key): void
 {
-    erdet_with_file_lock('notified.json', function ($handle) use ($key): void {
+    try {
+        erdet_with_file_lock('notified.json', function ($handle) use ($key): void {
         rewind($handle);
         $raw = stream_get_contents($handle);
         $data = is_string($raw) && $raw !== '' ? json_decode($raw, true) : [];
@@ -259,5 +264,8 @@ function erdet_mark_notification_sent(string $key): void
         ftruncate($handle, 0);
         rewind($handle);
         fwrite($handle, json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?: '{}');
-    });
+        });
+    } catch (Throwable) {
+        // Best effort dedupe only. Sending the alert is more important.
+    }
 }

@@ -23,7 +23,11 @@ function erdet_storage_file(string $name): string
 
 function erdet_read_cache(string $name, int $ttlSeconds): ?array
 {
-    $path = erdet_storage_file($name);
+    try {
+        $path = erdet_storage_file($name);
+    } catch (Throwable) {
+        return null;
+    }
 
     if (!is_file($path)) {
         return null;
@@ -59,6 +63,15 @@ function erdet_write_cache(string $name, array $data): void
     $tmp = $path . '.' . bin2hex(random_bytes(6)) . '.tmp';
     file_put_contents($tmp, $encoded, LOCK_EX);
     rename($tmp, $path);
+}
+
+function erdet_try_write_cache(string $name, array $data): void
+{
+    try {
+        erdet_write_cache($name, $data);
+    } catch (Throwable) {
+        // Cache must never decide whether the public status page works.
+    }
 }
 
 function erdet_with_file_lock(string $name, callable $callback)
