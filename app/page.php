@@ -33,7 +33,7 @@ function erdet_faq_items(array $status): array
         ],
         [
             'question' => 'Hva skjer hvis systemet er usikkert?',
-            'answer' => 'Ved usikkerhet viser siden Anta NEI, ikke JA. Det er for øyeblikket sendt en vurdering til menneskelig kontroll, og siden holder seg konservativ for å unngå falsk alarm.',
+            'answer' => 'Ved usikkerhet viser siden Anta NEI, ikke JA. Det blir øyeblikkelig sendt en vurdering til menneskelig kontroll, og siden oppdateres straks med riktig svar når det er ferdig kontrollert.',
         ],
         [
             'question' => 'Er dette en offisiell nettside?',
