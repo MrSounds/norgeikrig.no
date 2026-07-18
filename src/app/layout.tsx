@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: "/favicon.svg",
+  },
   openGraph: {
     title: siteConfig.title,
     description: siteConfig.description,
