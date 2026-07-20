@@ -33,7 +33,7 @@ $description = 'En enkel norsk statusside som svarer ja eller nei på om det er 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="<?= erdet_html($title) ?>">
   <meta name="twitter:description" content="<?= erdet_html($description) ?>">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.svg?v=20260720" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/styles.css">
   <script type="application/ld+json"><?= json_encode($faqJsonLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
 </head>
