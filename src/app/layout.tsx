@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   icons: {
-    icon: "/favicon.svg?v=20260720",
+    icon: "/favicon.svg?v=20260720b",
   },
   openGraph: {
     title: siteConfig.title,
