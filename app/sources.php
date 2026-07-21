@@ -10,4 +10,5 @@ const ERDET_FORSVARET_OPERATIONS_EXERCISES_URL = 'https://www.forsvaret.no/om-fo
 const ERDET_FORSVARET_EXERCISES_URL = 'https://www.forsvaret.no/om-forsvaret/operasjoner-og-ovelser/ovelser';
 const ERDET_FORSVARET_ACTIVITY_CALENDAR_URL = 'https://www.forsvaret.no/aktuelt-og-presse/kalender';
 const ERDET_FORSVARET_BASE_URL = 'https://www.forsvaret.no';
-
+const ERDET_GITHUB_REPOSITORY_URL = 'https://github.com/MrSounds/erdetkriginorge.no';
+const ERDET_GITHUB_ISSUES_URL = 'https://github.com/MrSounds/erdetkriginorge.no/issues';

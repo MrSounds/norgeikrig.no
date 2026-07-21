@@ -34,3 +34,13 @@ Siden skal aldri vise `JA` bare fordi et aktivt varsel inneholder ord som `krig`
 - [ ] Bytt in-memory e-postdedupe til persistent KV hvis siden faar flere serverless-instanser.
 - [ ] Legg inn admin-only manuell override hvis `JA` i fremtiden skal kreve menneskelig bekreftelse foer publisering.
 - [ ] Logg AI-vurderinger til en persistent audit-logg ved produksjonssetting.
+
+## SEO/AIO
+
+- [x] Publiser `robots.txt` med lenke til sitemap.
+- [x] Publiser en minimal `sitemap.xml` med den kanoniske forsiden.
+- [x] Bruk spørsmålet «Er det krig i Norge nå?» som sidens hovedoverskrift (`h1`).
+- [x] Videresend `www` og `/index.php` permanent til den kanoniske forsiden.
+- [x] Legg til `WebSite`- og `WebPage`-data sammen med eksisterende FAQ-data.
+- [x] Gjør kilde, metode, ansvar og offentlig kontaktkanal tydelig uten å komplisere førstesiden.
+- [ ] Verifiser SEO-endringene lokalt og på produksjon etter Git-deploy.

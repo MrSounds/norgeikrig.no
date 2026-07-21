@@ -40,6 +40,11 @@ function erdet_faq_items(array $status): array
             'answer' => 'Nei. erdetkriginorge.no er en uavhengig statusvisning som henter informasjon fra offentlige og pålitelige kilder omtrent hvert minutt. Siden er ment som en enkel oversikt, ikke som en erstatning for råd og varsler direkte fra politiet, Sivilforsvaret, DSB, regjeringen eller andre myndigheter.',
         ],
         [
+            'question' => 'Hvem står bak siden, og hvordan kan den kontrolleres?',
+            'answer' => 'erdetkriginorge.no er et uavhengig og åpent prosjekt som utvikles og vedlikeholdes via GitHub-kontoen MrSounds. Kildekode, vurderingsmetode og endringshistorikk kan kontrolleres i det offentlige GitHub-repoet: ' . ERDET_GITHUB_REPOSITORY_URL . '. Feil og spørsmål kan meldes her: ' . ERDET_GITHUB_ISSUES_URL . '. Statusen bygger på aktive Nødvarsler fra nodvarsel.no. Mulige krigsvarsler vurderes konservativt av KI, og både JA og usikkerhet utløser varsel for rask menneskelig kontroll.',
+            'answerHtml' => 'erdetkriginorge.no er et uavhengig og åpent prosjekt som utvikles og vedlikeholdes via GitHub-kontoen MrSounds. Kildekode, vurderingsmetode og endringshistorikk kan kontrolleres i <a href="' . erdet_html(ERDET_GITHUB_REPOSITORY_URL) . '">det offentlige GitHub-repoet</a>. <a href="' . erdet_html(ERDET_GITHUB_ISSUES_URL) . '">Feil og spørsmål kan meldes der</a>. Statusen bygger på aktive Nødvarsler fra <a href="' . erdet_html(ERDET_NODVARSEL_HOME_URL) . '">nodvarsel.no</a>. Mulige krigsvarsler vurderes konservativt av KI, og både JA og usikkerhet utløser varsel for rask menneskelig kontroll.',
+        ],
+        [
             'question' => 'Betyr NEI at det ikke er andre alvorlige hendelser enn krig som pågår?',
             'answer' => 'Nei. NEI betyr bare at denne siden ikke har funnet et aktivt varsel som tolkes som krig eller væpnet angrep mot Norge. Andre alvorlige hendelser kan fortsatt pågå.',
         ],
@@ -67,20 +72,44 @@ function erdet_faq_items(array $status): array
     ];
 }
 
-function erdet_faq_json_ld(array $faqItems): array
+function erdet_page_json_ld(array $faqItems, string $siteUrl, string $title, string $description): array
 {
+    $homeUrl = rtrim($siteUrl, '/') . '/';
+    $websiteId = $homeUrl . '#website';
+
     return [
         '@context' => 'https://schema.org',
-        '@type' => 'FAQPage',
-        'mainEntity' => array_map(static function (array $item): array {
-            return [
-            '@type' => 'Question',
-            'name' => $item['question'],
-            'acceptedAnswer' => [
-                '@type' => 'Answer',
-                'text' => $item['answer'],
+        '@graph' => [
+            [
+                '@type' => 'WebSite',
+                '@id' => $websiteId,
+                'url' => $homeUrl,
+                'name' => 'erdetkriginorge.no',
+                'alternateName' => [
+                    'Er det krig i Norge?',
+                    'Er det krig i Norge nå?',
+                ],
+                'inLanguage' => 'nb-NO',
             ],
-            ];
-        }, $faqItems),
+            [
+                '@type' => ['WebPage', 'FAQPage'],
+                '@id' => $homeUrl . '#webpage',
+                'url' => $homeUrl,
+                'name' => $title,
+                'description' => $description,
+                'isPartOf' => ['@id' => $websiteId],
+                'inLanguage' => 'nb-NO',
+                'mainEntity' => array_map(static function (array $item): array {
+                    return [
+                        '@type' => 'Question',
+                        'name' => $item['question'],
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text' => $item['answer'],
+                        ],
+                    ];
+                }, $faqItems),
+            ],
+        ],
     ];
 }

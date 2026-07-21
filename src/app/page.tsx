@@ -2,12 +2,15 @@ import {
   FORSVARET_ACTIVITY_CALENDAR_URL,
   FORSVARET_EXERCISES_URL,
   FORSVARET_OPERATIONS_EXERCISES_URL,
+  GITHUB_ISSUES_URL,
+  GITHUB_REPOSITORY_URL,
   NODVARSEL_ADVICE_URL,
   NODVARSEL_HOME_URL,
   NODVARSEL_RSS_INFO_URL,
 } from "@/lib/sources";
 import { getMilitaryExerciseNotices } from "@/lib/military-exercises";
 import { getWarStatus, nodvarselCredit } from "@/lib/status";
+import { siteConfig } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 
@@ -59,6 +62,15 @@ export default async function Home() {
         "Nei. erdetkriginorge.no er en uavhengig statusvisning som henter informasjon fra offentlige og pålitelige kilder omtrent hvert minutt. Siden er ment som en enkel oversikt, ikke som en erstatning for råd og varsler direkte fra politiet, Sivilforsvaret, DSB, regjeringen eller andre myndigheter.",
     },
     {
+      question: "Hvem står bak siden, og hvordan kan den kontrolleres?",
+      answer:
+        "erdetkriginorge.no er et uavhengig og åpent prosjekt som utvikles og vedlikeholdes via GitHub-kontoen MrSounds. Kildekode, vurderingsmetode og endringshistorikk kan kontrolleres i det offentlige GitHub-repoet: " +
+        GITHUB_REPOSITORY_URL +
+        ". Feil og spørsmål kan meldes her: " +
+        GITHUB_ISSUES_URL +
+        ". Statusen bygger på aktive Nødvarsler fra nodvarsel.no. Mulige krigsvarsler vurderes konservativt av KI, og både JA og usikkerhet utløser varsel for rask menneskelig kontroll.",
+    },
+    {
       question: "Betyr NEI at det ikke er andre alvorlige hendelser enn krig som pågår?",
       answer:
         "Nei. NEI betyr bare at denne siden ikke har funnet et aktivt varsel som tolkes som krig eller væpnet angrep mot Norge. Andre alvorlige hendelser kan fortsatt pågå.",
@@ -97,17 +109,37 @@ export default async function Home() {
         "Anta NEI vises hvis siden midlertidig ikke får hentet status fra RSS, eller hvis systemet er usikkert etter en KI-vurdering. Ved usikkerhet sendes vurderingen til menneskelig kontroll.",
     },
   ];
-  const faqJsonLd = {
+  const homeUrl = `${siteConfig.url.replace(/\/$/, "")}/`;
+  const websiteId = `${homeUrl}#website`;
+  const pageJsonLd = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqItems.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": websiteId,
+        url: homeUrl,
+        name: siteConfig.name,
+        alternateName: siteConfig.alternateNames,
+        inLanguage: "nb-NO",
       },
-    })),
+      {
+        "@type": ["WebPage", "FAQPage"],
+        "@id": `${homeUrl}#webpage`,
+        url: homeUrl,
+        name: siteConfig.title,
+        description: siteConfig.description,
+        isPartOf: { "@id": websiteId },
+        inLanguage: "nb-NO",
+        mainEntity: faqItems.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      },
+    ],
   };
 
   return (
@@ -118,8 +150,10 @@ export default async function Home() {
         }`}
       >
         <div className="statusHeroInner">
-          <p className="statusQuestion">{status.question}</p>
-          <h1 className="statusAnswer">{status.label}</h1>
+          <h1 className="statusQuestion">{status.question}</h1>
+          <p className="statusAnswer" aria-live="polite">
+            {status.label}
+          </p>
           {showStatusExplanation ? (
             <p className="statusExplanation">{status.message}</p>
           ) : null}
@@ -168,12 +202,14 @@ export default async function Home() {
 
       <footer className="sourceCredit">
         {nodvarselCredit.text} Se <a href={NODVARSEL_HOME_URL}>nodvarsel.no</a>{" "}
-        og <a href={NODVARSEL_RSS_INFO_URL}>RSS-informasjonen</a>.
+        og <a href={NODVARSEL_RSS_INFO_URL}>RSS-informasjonen</a>. Metode,
+        kildekode og endringshistorikk finnes i{" "}
+        <a href={GITHUB_REPOSITORY_URL}>det åpne GitHub-repoet</a>.
       </footer>
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageJsonLd) }}
       />
     </main>
   );

@@ -87,8 +87,21 @@ describe("Home page", () => {
     const html = renderToStaticMarkup(await Home());
 
     expect(html).toContain("NEI");
+    expect(html).toContain(
+      '<h1 class="statusQuestion">Er det krig i Norge nå?</h1>',
+    );
+    expect(html).toContain(
+      '<p class="statusAnswer" aria-live="polite">NEI</p>',
+    );
+    expect(html).not.toContain('<h1 class="statusAnswer">');
     expect(html).not.toContain('class="statusExplanation"');
     expect(html).not.toContain("Følg rådene i aktivt Nødvarsel");
+    expect(html).toContain('"@type":"WebSite"');
+    expect(html).toContain('"@type":["WebPage","FAQPage"]');
+    expect(html).toContain(
+      "Hvem står bak siden, og hvordan kan den kontrolleres?",
+    );
+    expect(html).toContain("https://github.com/MrSounds/erdetkriginorge.no");
     expect(html).toContain(
       "NEI. Ingen aktive Nødvarsler er tolket som krig eller væpnet angrep mot Norge. Du kan trygt slappe av.",
     );

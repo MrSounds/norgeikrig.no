@@ -3,6 +3,12 @@ DirectoryIndex index.php
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  RewriteCond %{THE_REQUEST} \s/+index\.php(?:[?\s]) [NC]
+  RewriteRule ^index\.php$ https://erdetkriginorge.no/ [R=301,L,QSD]
+
+  RewriteCond %{HTTP_HOST} ^www\.erdetkriginorge\.no$ [NC]
+  RewriteRule ^ https://erdetkriginorge.no%{REQUEST_URI} [R=301,L]
+
   RewriteRule (^|/)\.(?!well-known/) - [F,L]
   RewriteRule ^(app|cron|storage|tests)(/|$) - [F,L]
   RewriteRule ^config(\.local)?\.php$ - [F,L]

@@ -9,11 +9,11 @@ $militaryExerciseNotices = erdet_get_military_exercise_notices();
 $showStatusExplanation = in_array($status['status'], ['yes', 'assume-no'], true);
 $showExercisePopup = $status['status'] !== 'yes' && count($militaryExerciseNotices) > 0;
 $faqItems = erdet_faq_items($status);
-$faqJsonLd = erdet_faq_json_ld($faqItems);
 $config = erdet_config();
 $siteUrl = rtrim((string) $config['site_url'], '/');
 $title = 'Er det krig i Norge nå?';
 $description = 'En enkel norsk statusside som svarer ja eller nei på om det er krig i Norge nå, basert på aktive Nødvarsler.';
+$pageJsonLd = erdet_page_json_ld($faqItems, $siteUrl, $title, $description);
 ?>
 <!doctype html>
 <html lang="nb">
@@ -35,14 +35,14 @@ $description = 'En enkel norsk statusside som svarer ja eller nei på om det er 
   <meta name="twitter:description" content="<?= erdet_html($description) ?>">
   <link rel="icon" href="/favicon.svg?v=20260720b" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/styles.css">
-  <script type="application/ld+json"><?= json_encode($faqJsonLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
+  <script type="application/ld+json"><?= json_encode($pageJsonLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
 </head>
 <body>
   <main>
     <section class="statusHero statusHero-<?= erdet_html((string) $status['tone']) ?><?= $showExercisePopup ? ' statusHero-withExercise' : '' ?>">
       <div class="statusHeroInner">
-        <p class="statusQuestion"><?= erdet_html((string) $status['question']) ?></p>
-        <h1 class="statusAnswer"><?= erdet_html((string) $status['label']) ?></h1>
+        <h1 class="statusQuestion"><?= erdet_html((string) $status['question']) ?></h1>
+        <p class="statusAnswer" aria-live="polite"><?= erdet_html((string) $status['label']) ?></p>
         <?php if ($showStatusExplanation): ?>
           <p class="statusExplanation"><?= erdet_html((string) $status['message']) ?></p>
         <?php endif; ?>
@@ -91,6 +91,8 @@ $description = 'En enkel norsk statusside som svarer ja eller nei på om det er 
       Data om aktive nødvarsler kommer fra nodvarsel.no.
       Se <a href="<?= erdet_html(ERDET_NODVARSEL_HOME_URL) ?>">nodvarsel.no</a>
       og <a href="<?= erdet_html(ERDET_NODVARSEL_RSS_INFO_URL) ?>">RSS-informasjonen</a>.
+      Metode, kildekode og endringshistorikk finnes i
+      <a href="<?= erdet_html(ERDET_GITHUB_REPOSITORY_URL) ?>">det åpne GitHub-repoet</a>.
     </footer>
   </main>
   <script>

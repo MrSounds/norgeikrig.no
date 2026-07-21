@@ -16,3 +16,9 @@ export const FORSVARET_EXERCISES_URL =
 
 export const FORSVARET_ACTIVITY_CALENDAR_URL =
   "https://www.forsvaret.no/aktuelt-og-presse/kalender";
+
+export const GITHUB_REPOSITORY_URL =
+  "https://github.com/MrSounds/erdetkriginorge.no";
+
+export const GITHUB_ISSUES_URL =
+  "https://github.com/MrSounds/erdetkriginorge.no/issues";
