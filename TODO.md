@@ -43,4 +43,4 @@ Siden skal aldri vise `JA` bare fordi et aktivt varsel inneholder ord som `krig`
 - [x] Videresend `www` og `/index.php` permanent til den kanoniske forsiden.
 - [x] Legg til `WebSite`- og `WebPage`-data sammen med eksisterende FAQ-data.
 - [x] Gjør kilde, metode, ansvar og offentlig kontaktkanal tydelig uten å komplisere førstesiden.
-- [ ] Verifiser SEO-endringene lokalt og på produksjon etter Git-deploy.
+- [x] Verifiser SEO-endringene lokalt og på produksjon etter Git-deploy.
